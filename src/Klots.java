@@ -6,9 +6,9 @@ public class Klots extends Rectangle{
 
     public Klots() {
         setX(450);
-        setY(770);
+        setY(775);
         setWidth(150);
-        setHeight(20);
+        setHeight(15);
         setArcWidth(10);
         setArcHeight(10);
     }

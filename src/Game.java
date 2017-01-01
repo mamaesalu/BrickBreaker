@@ -54,7 +54,7 @@ public class Game {
     private void kuvaTaustJaTase() {
         switch (level) {
             case 1:
-                levelxtaust = new Image("level1taust.png");
+                levelxtaust = new Image("level3taust.png");
                 break;
             case 2:
                 levelxtaust = new Image("level2taust.png");
