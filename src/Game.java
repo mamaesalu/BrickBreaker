@@ -22,12 +22,12 @@ public class Game {
     private Tellised tellised;
     private Scene scene;
     private int level = 1;
-    Label tase;
-    Label skoorHetkel;
+    private Label tase;
+    private Label skoorHetkel;
     private int skoor = 0;
     private Image levelxtaust;
     private Stage vajutaSpace;
-    private double platsiLaius = 1000;
+    private double platsiLaius = 900;
 
     public Game() {
         gamestage();
@@ -39,7 +39,7 @@ public class Game {
         scene = new Scene(plats, platsiLaius, 800);
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("BrickBreakerOOP");
+        stage.setTitle("BrickBreaker");
         stage.setResizable(false);
         stage.show();
     }
@@ -128,7 +128,7 @@ public class Game {
         kontrolliKokkop6rget();
         kuvaSkoor();
         pall.liigu();
-        LevelOver();
+        levelOver();
     }
 
     private void tellisteKontroll(){
@@ -137,6 +137,22 @@ public class Game {
             pall.muudaYsuunda();
             skoor++;
             plats.getChildren().remove(tellis);
+        }
+    }
+
+    public void kontrolliKokkop6rget() {
+        if (pall.getPallx() < pall.getPallr() || pall.getPallx() > plats.getWidth() - pall.getPallr()) {
+            pall.muudaXsuunda();
+        }
+        if (pall.getPally() < pall.getPallr()) {
+            pall.muudaYsuunda();
+        }
+        if (klots.pallP6rkab(pall)) {
+            pall.muudaYklotsilt(klots.getKlotsX(), klots.getKlotsilaius());
+        }
+        else if (pall.getPally() > plats.getHeight()) {
+            youLose();
+            animation.stop();
         }
     }
 
@@ -150,11 +166,12 @@ public class Game {
         plats.getChildren().add(skoorHetkel);
     }
 
-    private void LevelOver() {
+    private void levelOver() {
         if (tellised.size() == 0) {
             System.out.println("tellised otsas");
             if (level == 3) {
                 youWin();
+                animation.stop();
             }
             else {
                 level++;
@@ -173,19 +190,6 @@ public class Game {
         teade.setFont(Font.font("Calibri", 46));
         stack.getChildren().add(teade);
         scene.setRoot(stack);
-    }
-
-    public void kontrolliKokkop6rget() {
-        if (pall.getPallx() < pall.getPallr() || pall.getPallx() > plats.getWidth() - pall.getPallr()) {
-            pall.muudaXsuunda();
-        }
-        if (pall.getPally() < pall.getPallr() || klots.pallP6rkab(pall)) {
-            pall.muudaYsuunda();
-        }
-        else if (pall.getPally() > plats.getHeight()) {
-            youLose();
-            animation.stop();
-        }
     }
 
     private void youLose() {

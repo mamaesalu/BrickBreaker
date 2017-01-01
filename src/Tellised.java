@@ -6,16 +6,13 @@ import java.util.Iterator;
 
 
 public class Tellised extends ArrayList {
-    private ArrayList tellised;
     private int tellisteVahe = 8;
     private int tellisteSuurusY = 25;
     private static int tellisteArv = 3;
     private static int ridadeArv = 2;
 
     public Tellised(double platsiLaius) {
-        tellised = new ArrayList();
         double tellisteSuurusX = ((platsiLaius - ((tellisteArv + 1) * tellisteVahe)) / tellisteArv);
-
         for (int i = 0; i < ridadeArv; i++) {
             for (int j = 0; j < tellisteArv; j++) {
                 Rectangle tellis = new Rectangle(tellisteSuurusX, tellisteSuurusY);

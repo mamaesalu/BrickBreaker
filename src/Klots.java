@@ -6,11 +6,11 @@ public class Klots extends Rectangle{
 
     public Klots() {
         setX(450);
-        setY(760);
+        setY(770);
         setWidth(150);
-        setHeight(25);
-        setArcWidth(20);
-        setArcHeight(20);
+        setHeight(20);
+        setArcWidth(10);
+        setArcHeight(10);
     }
 
     public void liigu(double platsiLaius, int suund){ //suund: 0-paremale,1-vasakule
@@ -27,10 +27,18 @@ public class Klots extends Rectangle{
         }
     }
 
-    public boolean pallP6rkab(Circle pall){
+    public boolean pallP6rkab(Circle pall){         //palli ja klotsi puude
         if (pall.intersects(getLayoutBounds())){
             return true;
         }
         return false;
+    }
+
+    public double getKlotsilaius(){
+        return getWidth();
+    }
+
+    public double getKlotsX(){
+        return getX();
     }
 }

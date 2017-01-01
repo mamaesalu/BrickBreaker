@@ -2,11 +2,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Pall extends Circle{
-    private double r = 20;
+    private double r = 17;  //raadius
     private double x = r+200;
     private double y = r+200;
-    private static int dx = 2;
-    private static int dy = 2;
+    private static double dx = 1;   //liikumise kiirus x
+    private static double dy = 2.3; //liikumise kiirus y
 
     public Pall() {
         setCenterX(x);
@@ -24,7 +24,19 @@ public class Pall extends Circle{
     }
 
     public void muudaYsuunda(){
-        dy = dy * -1;
+        dy =  dy * -1;
+    }
+
+    public void muudaYklotsilt(double klotsX, double klotsiLaius){ //1/3, 2/3 ja 3/3 klotsist annab pallile erineva põrkenurga
+        if (x >= klotsX && x < (klotsX + klotsiLaius/3)){
+            dy =  dy * -1.03;
+            }
+        if ((klotsX + klotsiLaius/3) <= x &&  x < (klotsX + 2*klotsiLaius/3)){
+            dy =  dy * -1;
+            }
+        if (x >= (klotsX + 2*klotsiLaius/3)){
+            dy =  dy * -0.97;
+            }
     }
 
     public void muudaXsuunda(){
@@ -32,7 +44,7 @@ public class Pall extends Circle{
     }
 
     public void lisakiirust(){
-        dx = Math.abs(dx)+ 1;//lisa palli liikumise kiirust iga leveli vahetusega
+        dx = Math.abs(dx)+ 1;//lisa palli liikumise kiirust (iga leveli vahetusega)
         dy = Math.abs(dy)+ 1;
     }
 
