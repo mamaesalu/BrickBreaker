@@ -49,6 +49,7 @@ public class Game {
         looLiikuvKlots();
         looTellised();
         looPall();
+        pauseGame();
     }
 
     private void kuvaTaustJaTase() {
@@ -183,6 +184,19 @@ public class Game {
             }
         }
     }
+
+    private void pauseGame(){
+        scene.setOnKeyPressed(e -> {
+                    if (e.getCode() == (KeyCode.P)) {           //pause
+                        animation.pause();
+                    }
+                    if (e.getCode() == (KeyCode.R)) {           //resume
+                        animation.play();
+                    }
+                }
+            );
+    }
+
 
     private void youWin() {
         StackPane stack = new StackPane();

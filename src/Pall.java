@@ -41,10 +41,10 @@ public class Pall extends Circle{
 
     public void muudaXsuunda(){
         dx = dx * -1;
-    }
+    }       //suunamuutus külgseinte puutel
 
     public void lisakiirust(){
-        dx = Math.abs(dx)+ 1;//lisa palli liikumise kiirust (iga leveli vahetusega)
+        dx = Math.abs(dx)+ 0.5;                           //lisa palli liikumise kiirust (iga leveli vahetusega)
         dy = Math.abs(dy)+ 1;
     }
 
