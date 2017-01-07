@@ -195,14 +195,14 @@ public class Game {
                     }
                 }
             );
-        Label pause = new Label("P - pause");                   //lisab mänguväljale info - paus P tähe all
+        Label pause = new Label("P - paus");                   //lisab mänguväljale info - paus P tähe all
         pause.setFont(Font.font("Calibri", 25));
         pause.setTextFill(Color.GREY);
         pause.setLayoutY(plats.getHeight()-130);
         pause.setLayoutX(10);
         plats.getChildren().add(pause);
 
-        Label resume = new Label("R - resume");                 //lisab mänguväljale info - jätka mängu R tähe all
+        Label resume = new Label("R - jätka");                 //lisab mänguväljale info - jätka mängu R tähe all
         resume.setFont(Font.font("Calibri", 25));
         resume.setTextFill(Color.GREY);
         resume.setLayoutY(plats.getHeight()-100);
