@@ -1,7 +1,9 @@
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -12,6 +14,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+import static javafx.application.Platform.exit;
 
 
 public class Game {
@@ -53,16 +57,7 @@ public class Game {
     }
 
     private void kuvaTaustJaTase() {
-        switch (level) {
-            case 1:
-                levelxtaust = new Image("level3taust.png");
-                break;
-            case 2:
-                levelxtaust = new Image("level2taust.png");
-                break;
-            case 3:
-                levelxtaust = new Image("level3taust.png");
-        }
+        levelxtaust = new Image("level3taust.png");
         BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO,
                 BackgroundSize.AUTO, false, false, true, true);
         BackgroundImage leveltaust = new BackgroundImage(levelxtaust,
@@ -72,7 +67,8 @@ public class Game {
         tase = new Label("Tase " + level);
         tase.setFont(Font.font("Calibri", 25));
         tase.setTextFill(Color.GREY);
-        tase.setLayoutY(plats.getHeight()-100);
+        tase.setLayoutY(plats.getHeight()-130);
+        tase.setLayoutX(plats.getWidth()-100);
         plats.getChildren().add(tase);
     }
 
@@ -187,14 +183,25 @@ public class Game {
 
     private void pauseGame(){
         scene.setOnKeyPressed(e -> {
-                    if (e.getCode() == (KeyCode.P)) {           //pause
+                    if (e.getCode() == (KeyCode.P)) {           //pause "P"
                         animation.pause();
                     }
-                    if (e.getCode() == (KeyCode.R)) {           //resume
+                    if (e.getCode() == (KeyCode.R)) {           //resume "R"
                         animation.play();
                     }
                 }
             );
+        Label pause = new Label("P - pause");                   //lisab mänguväljale info - paus P tähe all
+        pause.setFont(Font.font("Calibri", 25));
+        pause.setTextFill(Color.GREY);
+        pause.setLayoutY(plats.getHeight()-130);
+        plats.getChildren().add(pause);
+
+        Label resume = new Label("R - resume");                 //lisab mänguväljale info - jätka mängu R tähe all
+        resume.setFont(Font.font("Calibri", 25));
+        resume.setTextFill(Color.GREY);
+        resume.setLayoutY(plats.getHeight()-100);
+        plats.getChildren().add(resume);
     }
 
 
@@ -210,7 +217,33 @@ public class Game {
         StackPane stack = new StackPane();
         Label teade = new Label("Mäng läbi! Sinu skoor: " + skoor);
         teade.setFont(Font.font("Calibri", 46));
-        stack.getChildren().add(teade);
+        Button newGameBtn = new Button("Uus mäng");
+        newGameBtn.setFont(Font.font("Calibri", 46));
+        Button exitBtn = new Button("Välju");
+        exitBtn.setFont(Font.font("Calibri", 46));
+        stack.setAlignment(newGameBtn, Pos.BOTTOM_RIGHT);
+        stack.setAlignment(exitBtn, Pos.BOTTOM_LEFT);
+        stack.getChildren().addAll(teade, newGameBtn, exitBtn);
         scene.setRoot(stack);
+        newGameBtn.setOnMouseClicked(e-> {
+            scene.getWindow().hide();
+            new Game();
+        });
+        newGameBtn.setOnKeyPressed(e-> {
+            if (e.getCode() == KeyCode.ENTER) {
+                scene.getWindow().hide();
+                tellised.firstLevel();
+                pall.firstLevel();
+                new Game();
+            }
+        });
+        exitBtn.setOnMouseClicked(e-> {
+            exit();
+        });
+        exitBtn.setOnKeyPressed(e-> {
+            if (e.getCode() == KeyCode.ENTER) {
+                exit();
+            }
+        });
     }
 }

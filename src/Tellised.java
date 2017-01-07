@@ -42,5 +42,10 @@ public class Tellised extends ArrayList {
         tellisteArv = tellisteArv + 2; //lisa telliseid ritta +2
         ridadeArv++;//ridade arv +1
     }
+
+    public void firstLevel(){
+        tellisteArv = 3;
+        ridadeArv =2;
+    }
 }
 
