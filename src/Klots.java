@@ -5,7 +5,7 @@ public class Klots extends Rectangle{
     private static final int deltaX = 15;
 
     public Klots() {
-        setX(450);
+        setX(400);
         setY(775);
         setWidth(150);
         setHeight(15);
@@ -13,7 +13,7 @@ public class Klots extends Rectangle{
         setArcHeight(10);
     }
 
-    public void liigu(double platsiLaius, int suund){ //suund: 0-paremale,1-vasakule
+    public void liigu(double platsiLaius, int suund){ //vastavalt etteantud suunale liikumine: 0-paremale,1-vasakule
         double x = getX();
         if (suund == 0) {
             if (x > platsiLaius - getWidth()) {

@@ -14,7 +14,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
 import static javafx.application.Platform.exit;
 
 
@@ -32,6 +31,8 @@ public class Game {
     private Image levelxtaust;
     private Stage vajutaSpace;
     private double platsiLaius = 900;
+    private Button newGameBtn;
+    private Button exitBtn;
 
     public Game() {
         gamestage();
@@ -56,7 +57,7 @@ public class Game {
         pauseGame();
     }
 
-    private void kuvaTaustJaTase() {
+    private void kuvaTaustJaTase() {                //Taustapildi ja taseme numbri kuvamine mänguaknas
         levelxtaust = new Image("level3taust.png");
         BackgroundSize size = new BackgroundSize(BackgroundSize.AUTO,
                 BackgroundSize.AUTO, false, false, true, true);
@@ -100,14 +101,17 @@ public class Game {
         vajutaSpace();
     }
 
-    private void vajutaSpace() {
+    private void vajutaSpace() {                //Taset alustades vaheaken - vajutades tühikut alustab pall liikumist
         vajutaSpace = new Stage();
         VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
         Scene sceneVajutaSpace = new Scene(vbox, 300, 100);
         Label label = new Label("Tase " + level+ ".");
         Label label2 = new Label("Alustamiseks vajuta tühikut");
         Label label3 = new Label("Mängi vasak-parem nooleklahvidega");
         label.setFont(Font.font("Calibri", 24));
+        label.setTextFill(Color.BLUE);
+        label2.setFont(Font.font("Calibri", 20));
         vbox.getChildren().addAll(label, label2, label3);
         vajutaSpace.initStyle(StageStyle.UNDECORATED);
         vajutaSpace.setScene(sceneVajutaSpace);
@@ -137,7 +141,7 @@ public class Game {
         }
     }
 
-    public void kontrolliKokkop6rget() {
+    public void kontrolliKokkop6rget() {                    //Seinte ja klotsiga kokkupõrke kontroll
         if (pall.getPallx() < pall.getPallr() || pall.getPallx() > plats.getWidth() - pall.getPallr()) {
             pall.muudaXsuunda();
         }
@@ -153,7 +157,7 @@ public class Game {
         }
     }
 
-    private void kuvaSkoor() {
+    private void kuvaSkoor() {                                  //Punktisumma kuvamine mänguaknas
         plats.getChildren().remove(skoorHetkel);
         skoorHetkel = new Label("Skoor " + skoor);
         skoorHetkel.setFont(Font.font("Calibri", 25));
@@ -163,14 +167,14 @@ public class Game {
         plats.getChildren().add(skoorHetkel);
     }
 
-    private void levelOver() {
-        if (tellised.size() == 0) {
+    private void levelOver() {                                  //Tellised otsas - kui tase on kõrgeim - mäng läbi
+        if (tellised.size() == 0) {                             //kui olemas kõrgem tase, liikumine sellele
             System.out.println("tellised otsas");
             if (level == 3) {
                 youWin();
                 animation.stop();
             }
-            else {
+            else {                                              //Järgnevale tasemele minek
                 level++;
                 animation.stop();
                 plats.getChildren().removeAll(pall, klots, tase);
@@ -195,12 +199,14 @@ public class Game {
         pause.setFont(Font.font("Calibri", 25));
         pause.setTextFill(Color.GREY);
         pause.setLayoutY(plats.getHeight()-130);
+        pause.setLayoutX(10);
         plats.getChildren().add(pause);
 
         Label resume = new Label("R - resume");                 //lisab mänguväljale info - jätka mängu R tähe all
         resume.setFont(Font.font("Calibri", 25));
         resume.setTextFill(Color.GREY);
         resume.setLayoutY(plats.getHeight()-100);
+        resume.setLayoutX(10);
         plats.getChildren().add(resume);
     }
 
@@ -209,7 +215,10 @@ public class Game {
         StackPane stack = new StackPane();
         Label teade = new Label("Hästi tehtud! Sinu võit skooriga " + skoor);
         teade.setFont(Font.font("Calibri", 46));
-        stack.getChildren().add(teade);
+        createButtons();
+        stack.setAlignment(newGameBtn, Pos.BOTTOM_RIGHT);
+        stack.setAlignment(exitBtn, Pos.BOTTOM_LEFT);
+        stack.getChildren().addAll(teade, newGameBtn, exitBtn);
         scene.setRoot(stack);
     }
 
@@ -217,14 +226,18 @@ public class Game {
         StackPane stack = new StackPane();
         Label teade = new Label("Mäng läbi! Sinu skoor: " + skoor);
         teade.setFont(Font.font("Calibri", 46));
-        Button newGameBtn = new Button("Uus mäng");
-        newGameBtn.setFont(Font.font("Calibri", 46));
-        Button exitBtn = new Button("Välju");
-        exitBtn.setFont(Font.font("Calibri", 46));
+        createButtons();
         stack.setAlignment(newGameBtn, Pos.BOTTOM_RIGHT);
         stack.setAlignment(exitBtn, Pos.BOTTOM_LEFT);
         stack.getChildren().addAll(teade, newGameBtn, exitBtn);
         scene.setRoot(stack);
+    }
+
+    private void createButtons(){                 //Lõppaknasse uue mängu alustamiseks ja mängust väljumiseks nupud
+        newGameBtn = new Button("Uus mäng");
+        newGameBtn.setFont(Font.font("Calibri", 46));
+        exitBtn = new Button("Välju");
+        exitBtn.setFont(Font.font("Calibri", 46));
         newGameBtn.setOnMouseClicked(e-> {
             scene.getWindow().hide();
             new Game();

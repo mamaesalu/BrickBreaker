@@ -26,7 +26,7 @@ public class Tellised extends ArrayList {
         }
     }
 
-    public Rectangle kontrolliTellised(Circle pall) {
+    public Rectangle kontrolliTellised(Circle pall) {   //palli poolt puudutatud tellise info tagastamine
         Iterator<Rectangle> tellisteIter = iterator();
         while (tellisteIter.hasNext()) {
             Rectangle seetellis = tellisteIter.next();
@@ -38,14 +38,14 @@ public class Tellised extends ArrayList {
         return null;
     }
 
-    public void nextLevel(){
-        tellisteArv = tellisteArv + 2; //lisa telliseid ritta +2
-        ridadeArv++;//ridade arv +1
+    public void nextLevel(){                            //Taseme vahetusel raskusastme lisamine
+        tellisteArv = tellisteArv + 2;                  //lisa telliseid ritta +2
+        ridadeArv++;                                    //ridade arv +1
     }
 
     public void firstLevel(){
         tellisteArv = 3;
-        ridadeArv =2;
+        ridadeArv = 2;
     }
 }
 

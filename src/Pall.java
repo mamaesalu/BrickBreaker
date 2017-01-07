@@ -16,7 +16,7 @@ public class Pall extends Circle{
         setStroke(Color.CORAL);
     }
 
-    public void liigu(){
+    public void liigu(){                    //animatsioonis palli liikumine
         x+=dx;
         setCenterX(x);
         y+=dy;
@@ -58,7 +58,7 @@ public class Pall extends Circle{
 
     public double getPally(){ return y; }
 
-    public void firstLevel(){
+    public void firstLevel(){                        //staatilise muutuja algväärtuse taastamine mängu taasalustamiseks
         dx = 1;
         dy = 2.3;
     }
